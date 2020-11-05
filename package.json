@@ -1,0 +1,41 @@
+{
+  "name": "rc-restore-scroll",
+  "version": "1.0.0",
+  "author": "Auban le Grelle <auban@viamonkey.com>",
+  "homepage": "https://redcastor.io",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "description": "A Vanilla JS plugin for restore scroll on specific timeout.",
+  "keywords": [
+    "scroll",
+    "restore",
+    "JS",
+    "javascript",
+    "vanilla"
+  ],
+  "main": "dist/rc-restore-scroll.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:RedCastor/rc-restore-scroll.git"
+  },
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-uglify": "^3.0.0",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1",
+    "run-sequence": "^2.2.1",
+    "lodash": ">=4.17.5"
+  }
+}

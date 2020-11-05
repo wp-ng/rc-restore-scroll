@@ -1,0 +1,28 @@
+{
+  "name": "rc-restore-scroll",
+  "version": "1.0.0",
+  "author": "Auban le Grelle <auban@viamonkey.com>",
+  "homepage": "https://redcastor.io",
+  "description": "A Vanilla JS plugin for restore scroll on specific timeout.",
+  "license": "MIT",
+  "keywords": [
+    "scroll",
+    "restore",
+    "JS",
+    "javascript",
+    "vanilla"
+  ],
+  "main": [
+    "dist/rc-restore-scroll.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "**/*.txt",
+    ".jscsrc",
+    ".jshintrc",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
