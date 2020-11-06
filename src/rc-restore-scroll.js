@@ -69,8 +69,8 @@
     };
 
     var defaultOptions = {
-        size: 5,
-        timeout: 400,
+        size: 25,
+        timeout: 300,
         offset: 0
     };
 
@@ -224,5 +224,3 @@
 
     window.rcrs = rcrs;
 })(window.rcrs || {});
-
-window.rcrs.initialise();
