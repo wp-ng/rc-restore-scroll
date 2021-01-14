@@ -46,6 +46,8 @@
         }
     };
     var defaultOptions = {
+        id: null,
+        timeoutHeight: 1e3,
         size: 25,
         timeout: 300,
         offset: 0
@@ -68,6 +70,7 @@
                     scrolly: []
                 };
             }
+            this.options.timeoutHeight = parseInt(this.options.timeoutHeight, 10);
             this.options.size = parseInt(this.options.size, 10);
             this.options.timeout = parseInt(this.options.timeout, 10);
             this.options.offset = parseInt(this.options.offset, 10);
@@ -101,7 +104,11 @@
             }
             return {
                 url: null,
-                scrolly: 0
+                scrolly: {
+                    pos: 0,
+                    id: null,
+                    height: null
+                }
             };
         },
         removeHistory: function(url) {
@@ -122,13 +129,21 @@
                 }
             }
         },
-        addHistory: function(url, position) {
+        addHistory: function(url, position, id, height) {
             var i = this.history.urls.indexOf(url);
             if (i !== -1) {
-                this.history.scrolly[i] = position;
+                this.history.scrolly[i] = {
+                    pos: position,
+                    id: id,
+                    height: height
+                };
             } else {
                 this.history.urls.push(url);
-                this.history.scrolly.push(position);
+                this.history.scrolly.push({
+                    pos: position,
+                    id: id,
+                    height: height
+                });
             }
         },
         saveHistory: function() {
@@ -140,8 +155,21 @@
             if (item.url) {
                 rcrs.removeHistory(item.url);
                 rcrs.saveHistory();
+                if (!item.scrolly || typeof item.scrolly !== "object") {
+                    return;
+                }
+                window.scrollTo(0, 0);
+                if (item.scrolly.id && item.scrolly.height) {
+                    var elem_id = document.getElementById(item.scrolly.id);
+                    if (elem_id) {
+                        elem_id.style.minHeight = item.scrolly.height + "px";
+                        setTimeout(function() {
+                            elem_id.style.minHeight = null;
+                        }, rcrs.options.timeoutHeight);
+                    }
+                }
                 setTimeout(function() {
-                    window.scrollTo(0, item.scrolly + rcrs.options.offset);
+                    window.scrollTo(0, item.scrolly.pos + rcrs.options.offset);
                 }, rcrs.options.timeout);
             }
         },
@@ -151,7 +179,9 @@
             if (to_url) {
                 var item = rcrs.removeHistory(to_url);
             }
-            rcrs.addHistory(href, parseInt(window.scrollY, 10));
+            var elem_id = document.getElementById(rcrs.options.id);
+            var height = elem_id ? parseInt(elem_id.clientHeight, 10) : null;
+            rcrs.addHistory(href, parseInt(window.scrollY, 10), rcrs.options.id, height);
             rcrs.saveHistory();
         },
         destroy: function() {
